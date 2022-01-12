@@ -1,8 +1,37 @@
 \section{Chapter 1: Basics}
 
 \subsection{What is a Category?}
+\begin{definition}
+  A \textbf{category} consists of:
+  \begin{itemize}
+    \item  a collection of \textbf{objects} ($X, Y, Z$, etc.)
+    \item a collection of \textbf{morphisms} ($f, g, h$, etc.) where the morphisms have \textit{specified} \textbf{domain} and \textbf{codomain} objects, i.e. $f : X \to Y$
+  \end{itemize}
+  such that
+  \begin{itemize}
+    \item each object has an \textbf{identity} morphism $\id_X : X \to X$
+    \item \textbf{composition} of morphisms gives a new morphism, so that if $f : X \to Y$, and $g: Y \to Z$, then $g \circ f = g f : X \to Z$.
+    \item the identity behaves as expected with respect to composition, i.e. for all $f : X \to Y$, that $f \id_X = \id_Y f = f$.
+    \item the composition of morphisms is \textbf{associative}, so if we have $f : X \to Y$, $g : Y \to Z$, and $h : Z \to W$, then $(hg)f = h(gf) := hgf : X \to W$.
+  \end{itemize}
+\end{definition}
+
+\begin{example}
+  List of examples of some common categories:
+  \begin{itemize}
+    \item $\cat{Set}$, the category with sets as objects and regular functions as morphisms
+    \item $\cat{Grp}$, the category with groups as objects and group homomorphisms as morphisms
+    \item $\cat{Top}$, the category with topological spaces as objects and continuous maps as morphisms
+    \item
+  \end{itemize}
+  Note that categories are often named after their objects.
+\end{example}
 
 \subsection{Opposite Day}
+\begin{definition}
+  If $\cat C$ is a category, we define the \textbf{opposite category} $\opp{\cat C}$
+\end{definition}
+
 
 \subsection{What is a Functor?}
 
