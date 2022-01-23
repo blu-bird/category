@@ -1,7 +1,7 @@
 \section{Chapter 1: Basics}
 
 \subsection{What is a Category?}
-\begin{definition}
+\begin{definition}[Category, Object, Morphism]
   A \textbf{category} consists of:
   \begin{itemize}
     \item  a collection of \textbf{objects} ($X, Y, Z$, etc.)
@@ -16,26 +16,116 @@
   \end{itemize}
 \end{definition}
 
-\begin{example}
-  List of examples of some common categories:
+\begin{example}[Concrete Categories]
+  List of examples of some common concrete categories, whose objects are backed by sets:
   \begin{itemize}
     \item $\cat{Set}$, the category with sets as objects and regular functions as morphisms
     \item $\cat{Grp}$, the category with groups as objects and group homomorphisms as morphisms
+    \item $\cat{Ring}$, the category with rings as objects and ring homomorphisms as morphisms
     \item $\cat{Top}$, the category with topological spaces as objects and continuous maps as morphisms
-    \item
+    \item $\cat{Vect}_F$, the category with vector spaces over a field $F$ as objects and linear transformations as morphisms
+    \item $\cat{Set}_*$, the category with pointed sets (pairs of sets, and elements in that set) with functions that preserve the base point, i.e. a morphism $f : (A, x) \to (B, y)$ with $x \in A, y \in B$ must have $f(x) = y$.
   \end{itemize}
   Note that categories are often named after their objects.
 \end{example}
 
-\subsection{Opposite Day}
+\begin{example}[Abstract Categories]
+  Some more abstract categories that will come up:
+  \begin{itemize}
+    \item For a ring (with unit) $R$, $\cat{Mat}_R$ is the category whose objects are the positive integers $\ZZ^+$ and the set of morphisms from $m$ to $n$ is the set of $n \times m$ matrices with entries in $R$. We use matrix multiplication for morphism composition here.
+    \item A group $G$ (or monoid, really) defines a category $\cat BG$ with one object, and one morphism for each element in the group $G$.
+    \item A poset $(P, \leq)$ defines a category $\cat P$, where the objects of $\cat P$ are the elements in $P$ and a unique morphism $f : x \to y$ if $x \leq y$.
+  \end{itemize}
+\end{example}
+
+Almost immediately, you might see that we run into size issues in category theory, as there is no such thing as a set of all sets! (See \textbf{Bertrand's Paradox} for why.) We need something somewhat ``bigger'' than a set to describe a category, but we aren't going to be too concerned with this. It won't be lucrative to restrict ourselves to categories who have sets of objects, but we can do the following:
+
+\begin{definition}[Smallness]
+  We treat several different sizes of categories. A category $\cat C$ is:
+  \begin{itemize}
+    \item \textbf{small} if $\cat C$ only has a set's worth of morphisms.
+    \item \textbf{locally small} if for any two objects $X, Y \in \cat C$, that the collection of morphisms $\cat C(X, Y)$ is a set.
+  \end{itemize}
+\end{definition}
+Just to reiterate the definition for clarity:
 \begin{definition}
-  If $\cat C$ is a category, we define the \textbf{opposite category} $\opp{\cat C}$
+  In a category $\cat C$, the collection of morphisms between objects $X, Y \in \cat C$ is denoted $\cat C(X, Y)$ (other places might denote it $\mathrm{Hom}(X, Y)$). This is called a \textbf{hom-set} if $\cat C$ is locally small (otherwise, it might not be a set!).
 \end{definition}
 
+Finally, some common terminology about morphisms:
+\begin{definition}[Morphism Types]
+  A morphism $f : X \to Y$ is:
+  \begin{itemize}
+    \item an \textbf{isomorphism} if there exists a morphism $g: Y \to X$ that acts as a ``right and left inverse,'' i.e. $fg = \id_Y$, $gf = \id_X$. We say then that $X$ and $Y$ are \textbf{isomorphic}, so $X \iso Y$. (This is pretty similar to one characterization of bijections as ``invertible functions'' in regular set theory.)
+    \item an \textbf{endomorphism} if $Y$ and $X$ are the same object, so $f$ is actually a morphism $X \to X$
+    \item an \textbf{automorphism} if it is an isomorphism and an endomorphism.
+  \end{itemize}
+\end{definition}
+Often, the prefixes endo- and auto- will be applied in other contexts, where they mean roughly the same thing.
+
+\subsection{Opposite Day}
+\begin{definition}[Opposite Category]
+  If $\cat C$ is a category, we define the \textbf{opposite category} $\opp{\cat C}$ as the category with the same objects as $C$, but for all morphisms $f : X \to Y$ in $\cat C$, $\opp{\cat C}$ has morphisms $\opp f : Y \to X$ in $\opp{\cat C}$.
+
+  To be explicit, the opposite category $\opp{\cat C}$ has the following properties:
+  \begin{itemize}
+    \item Every object $X \in \cat C$ has an identity morphism $\opp{\id_X}$.
+    \item Composition works in the reverse order. We define composition of $\opp f : X \to Y$ with $\opp g : Y \to Z$ by taking $\opp g \circ \opp f =  \opp{f \circ g}$, since $\opp f$ corresponds to $f : Y \to X$ in $\cat C$, and $\opp g$ corresponds to $g : Z \to Y$ in $\cat C$, so $f \circ g : Z \to X$ in $\cat C$ will correspond to the result of our composition in $\opp{\cat C}$.
+  \end{itemize}
+\end{definition}
+Note that the operation of composition behaves roughly the same way in the opposite category as in the regular category, so we see that any theorem that holds for a regular category can be shown for an opposite category by ``flipping all the arrows around,'' and vice versa. This will allow us to essentially get double the theorems and propositions for any statement we make, and this idea is called \textbf{duality}.
+
+Here's an example of a lemma where appealing to duality cleans up half of the work for us:
+\begin{lemma}
+  1.2.3 in Riehl?
+\end{lemma}
+\begin{proof}
+  hiho
+\end{proof}
+
+Here's a pair of dual definitions for morphisms that correspond loosely to our ideas of ``injective'' and ``surjective'' as set-functions.
+\begin{definition}[Monic, Epic]
+  A morphism $f : x \to y$ is:
+  \begin{itemize}
+    \item a \textbf{monomorphism} if for all $h, k : w \to x$ parallel morphisms (going between the same two objects), having $fh = fk$ implies $h = k$. $f$ is then said to be \textbf{monic}.
+    \item an \textbf{epimorphism} if for all $h, k : y \to z$ parallel morphisms (going between the same two objects), having $hf = kf$ implies $h = k$. $f$ is then said to be \textbf{epic}.
+  \end{itemize}
+\end{definition}
+These are fairly opaque definitions, so why do these correspond to the ideas of ``injective'' and ``surjective''?
+
+<insert explicit contrapositive idea here>
+
+However, we CANNOT say that if a morphism $f : x \to y$ is monic and epic, then it is an isomorphism. For instance, consider the ring homomorphism by inclusion $i : \ZZ \to \RR$. <fill in the details>
 
 \subsection{What is a Functor?}
+We have functions between sets, but what is a relation between categories? Introducing the \textbf{functor}:
+\begin{definition}[Functor]
+  Let $\cat C, \cat D$ be categories. A (covariant) \textbf{functor} $F : \cat C \to \cat D$ consists of:
+  \begin{itemize}
+    \item an object $Fc$ for every $c \in \cat C$
+    \item a morphism $Ff : Fc \to Fc'$ for every $f : c \to c'$ in $\cat C$
+  \end{itemize}
+  such that $F(\id_c) = \id_{Fc}$ for all $c \in \cat C$ and $Fg \circ Ff = F(g \circ f)$.
+\end{definition}
+
+Again, we shower you with a lot of examples here, so that you get an idea:
+\begin{example}[Covariant Functors]
+  examples
+\end{example}
+
 
 \subsection{What is a Natural Transformation?}
+Natural transformations are a little weird, because we don't really have a common set equivalent out in the world -- the best way to describe it is as a ``function'' between two functors $F, G : \cat C \to \cat D$. Here's the definition first:
+\begin{definition}
+  Let $\cat C, \cat D$ be categories and $F, G : \cat C \to \cat D$ be functors. A \textbf{natural transformation} $\alpha : F \Rightarrow G$ is a collection of arrows $\alpha_c : Fc \to Gc$ in $\cat D$, where this collection ranges over all $c \in \cat C$, such that for all $f : c \to c'$ in $\cat C$, we have that the following diagram \textbf{commutes}:
+  \begin{center}
+    \begin{tikzcd}
+      Fc \arrow[r, "\alpha_c"] \arrow[d, "Ff"'] & Gc \arrow[d, "Gf"] \\
+      Fc' \arrow[r, "\alpha_{c'}"']             & Gc'
+    \end{tikzcd}
+  \end{center}
+  When we say a diagram \textbf{commutes}, it means we get the same resulting morphism by composition tracing along any path between two objects on the diagram.
+\end{definition}
 
 \subsection{Equivalence of Categories}
 
