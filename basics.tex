@@ -63,6 +63,11 @@ Finally, some common terminology about morphisms:
 \end{definition}
 Often, the prefixes endo- and auto- will be applied in other contexts, where they mean roughly the same thing.
 
+A few more defintions about categories that can be derived from an original category $\cat C$: 
+\begin{definition}
+A \textbf{subcategory} $\cat D$ of $\cat C$ is a restriction to a subcollection of objects of $\cat C$ and the subcollection of morphisms that contains the domain and codomain of every 
+\end{definition}
+
 \subsection{Opposite Day}
 \begin{definition}[Opposite Category]
   If $\cat C$ is a category, we define the \textbf{opposite category} $\opp{\cat C}$ as the category with the same objects as $C$, but for all morphisms $f : X \to Y$ in $\cat C$, $\opp{\cat C}$ has morphisms $\opp f : Y \to X$ in $\opp{\cat C}$.
@@ -126,6 +131,7 @@ Natural transformations are a little weird, because we don't really have a commo
   \end{center}
   When we say a diagram \textbf{commutes}, it means we get the same resulting morphism by composition tracing along any path between two objects on the diagram.
 \end{definition}
+
 
 \subsection{Equivalence of Categories}
 
